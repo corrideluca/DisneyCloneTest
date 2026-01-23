@@ -17,7 +17,7 @@ const cardBrandData = [
   {
     href: '/brand/star-wars',
     image: '/assets/img/categories/star_wars.png',
-    video: '/assets/videos/star-wars.mp4',
+    video: '/assets/videos/bg-star-wars.mp4',
   },
   {
     href: '/brand/national-geographic',

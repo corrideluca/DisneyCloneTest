@@ -8,12 +8,18 @@ import {
   getMoviesWaltDisneyActionAdventure,
   getMoviesWaltDisneyAnimations,
 } from '../services/getDataFromAPI';
+import trendingMovies from './trendingMovies';
 
 const brandData = {
   marvel: {
     posterBrand: '/assets/img/categories/bg-marvel.jpg',
     videoBrand: '/assets/videos/bg-marvel.mp4',
     dataPage: [
+      {
+        call: Promise.resolve(trendingMovies.marvel),
+        state: 'top3Marvel',
+        title: 'Top 3 Hoy en Argentina',
+      },
       {
         call: getItemsFromBrand('movie', '420'),
         state: 'moviesMarvel',
@@ -52,6 +58,11 @@ const brandData = {
     videoBrand: '/assets/videos/bg-disney.mp4',
     dataPage: [
       {
+        call: Promise.resolve(trendingMovies.disney),
+        state: 'top3Disney',
+        title: 'Top 3 Hoy en Argentina',
+      },
+      {
         call: getMoviesWaltDisneyAnimations(),
         state: 'moviesWaltDisney',
         title: 'En primer plano',
@@ -79,6 +90,11 @@ const brandData = {
     videoBrand: '/assets/videos/bg-pixar.mp4',
     dataPage: [
       {
+        call: Promise.resolve(trendingMovies.pixar),
+        state: 'top3Pixar',
+        title: 'Top 3 Hoy en Argentina',
+      },
+      {
         call: getItemsFromBrand('movie', '3'),
         state: 'moviesPixar',
         title: 'En primer plano',
@@ -101,6 +117,11 @@ const brandData = {
     videoBrand: '/assets/videos/bg-national-geographic.mp4',
     dataPage: [
       {
+        call: Promise.resolve(trendingMovies.nationalGeographic),
+        state: 'top3Geographic',
+        title: 'Top 3 Hoy en Argentina',
+      },
+      {
         call: getItemsFromBrand('movie', '7521'),
         state: 'moviesGeographic',
         title: 'Documentales',
@@ -115,8 +136,13 @@ const brandData = {
 
   starWars: {
     posterBrand: '/assets/img/categories/bg-star-wars.jpg',
-    videoBrand: '/assets/videos/bg-star-wars.mp4',
+    videoBrand: 'https://krhtrpwyzjpqnmxailto.supabase.co/storage/v1/object/public/brand-videos/star-wars-bg.mp4',
     dataPage: [
+      {
+        call: Promise.resolve(trendingMovies.starWars),
+        state: 'top3StarWars',
+        title: 'Top 3 Hoy en Argentina',
+      },
       {
         call: getItemsFromBrand('movie', '1'),
         state: 'starWarsMovies',
@@ -139,6 +165,11 @@ const brandData = {
     posterBrand: '/assets/img/categories/bg-brand-star.jpg',
     videoBrand: '/assets/videos/bg-brand-star.mp4',
     dataPage: [
+      {
+        call: Promise.resolve(trendingMovies.star),
+        state: 'top3Star',
+        title: 'Top 3 Hoy en Argentina',
+      },
       {
         call: getItemsFromStar('tv'),
         state: 'itemsStar',

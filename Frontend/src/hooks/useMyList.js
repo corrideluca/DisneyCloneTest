@@ -6,6 +6,7 @@ import addItemToDB from '../services/addItemToDB';
 import addItemToMyList from '../services/addItemToMyList';
 import getItemFromMyList from '../services/getItemFromMyList';
 import deleteItemFromMyList from '../services/deleteItemFromMyList';
+import trendingMovies from '../utils/trendingMovies';
 
 function useMyList({ id, type }) {
   const { currentUser } = useAuth();
@@ -17,6 +18,24 @@ function useMyList({ id, type }) {
   useEffect(() => {
     setLoading(true);
 
+    // Check if this is a custom cat movie
+    if (id.startsWith('cat-')) {
+      // Find the cat movie in trendingMovies
+      let catMovie = null;
+      Object.values(trendingMovies).forEach((brandMovies) => {
+        const found = brandMovies.find((movie) => movie.id === id);
+        if (found) {
+          catMovie = found;
+        }
+      });
+
+      if (catMovie) {
+        setItemDetail(catMovie);
+        setLoading(false);
+        return;
+      }
+    }
+
     // Obtengo los detalles de la película o serie
     getItemDetail(id, type)
       .then((data) => {
@@ -24,17 +43,21 @@ function useMyList({ id, type }) {
       });
 
     // Compruebo si la película o serie está guardada en la lista del usuario actual
-    getItemFromMyList({ idItem: id, userId: currentUser.id })
-      .then((data) => {
-        if (data.length > 0) {
-          setSelected(true);
-        } else {
-          setSelected(false);
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    if (currentUser?.id) {
+      getItemFromMyList({ idItem: id, userId: currentUser.id })
+        .then((data) => {
+          if (data.length > 0) {
+            setSelected(true);
+          } else {
+            setSelected(false);
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
   }, [id]);
 
   const handleSaveMyList = async () => {

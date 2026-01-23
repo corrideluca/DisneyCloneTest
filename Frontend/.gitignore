@@ -25,3 +25,11 @@ dist-ssr
 *.sw?
 
 package-lock.json
+
+# Large brand videos (use Supabase Storage or CDN for production)
+public/assets/videos/star-wars.mp4
+public/assets/videos/disney.mp4
+public/assets/videos/marvel.mp4
+public/assets/videos/pixar.mp4
+public/assets/videos/national-geographic.mp4
+public/assets/videos/brand-star.mp4

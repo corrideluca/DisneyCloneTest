@@ -18,6 +18,14 @@ function Tabs({ item, id, type }) {
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
+    // Skip API calls for custom cat movies
+    if (id.startsWith('cat-')) {
+      setSimilarItems([]);
+      setCast([]);
+      setLoading(false);
+      return;
+    }
+
     try {
       getSimilarItems(id, type).then((data) => {
         setSimilarItems(data);

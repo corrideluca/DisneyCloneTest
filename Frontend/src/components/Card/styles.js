@@ -1,6 +1,29 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+const TitleOverlay = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+  padding: 2rem 1rem 1rem 1rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+
+  span {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 468px){
+    display: none;
+  }
+`;
+
 const LinkStyled = styled(Link)`
   padding: 0.25rem;
   flex: 0 0 calc(100% / var(--items-per-screen));
@@ -17,6 +40,16 @@ const LinkStyled = styled(Link)`
     padding-right: 0;
   }
 
+  &:hover ${TitleOverlay} {
+    transform: translateY(0);
+  }
+
+`;
+
+const CardWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
 `;
 
 const ImageStyled = styled.img`
@@ -54,4 +87,4 @@ const ImageStyled = styled.img`
   }
 `;
 
-export { ImageStyled, LinkStyled };
+export { ImageStyled, LinkStyled, CardWrapper, TitleOverlay };
